@@ -17,18 +17,18 @@ mongoose.connect(process.env.MONGO_URI);
 //  .then(() => console.log("MongoDB Connected"));
 
 
-// app.get("/users", async (req, res) => {
-//   const users = await User.find();
-//   res.json(users);
-// });
+app.get("/users", async (req, res) => {
+  const users = await User.find();
+  res.json(users);
+});
 
-// app.post("/users", async (req, res) => {
-//   const newUser = new User({
-//     name: req.body.name
-//   });
-//   await newUser.save();
-//   res.json(newUser);
-// });
+app.post("/users", async (req, res) => {
+  const newUser = new User({
+    name: req.body.name
+  });
+  await newUser.save();
+  res.json(newUser);
+});
 const cors = require("cors");
 
 app.use(cors({

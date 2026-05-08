@@ -6,10 +6,12 @@ const app = express();
 
 app.use(cors());           // Allow frontend connections
 app.use(express.json());   // Parse JSON request bodies
+require("dotenv").config();
 
-mongoose
- .connect("mongodb://127.0.0.1:27017/mernusers")
- .then(() => console.log("MongoDB Connected"));
+mongoose.connect(process.env.mongodb+srv://pallvviidhiman_db_user:<db_password>@cluster0.yxfx8pn.mongodb.net/?appName=Cluster0)
+// mongoose
+//  .connect("mongodb://127.0.0.1:27017/mernusers")
+//  .then(() => console.log("MongoDB Connected"));
 
 const User = require("./models/User");
 

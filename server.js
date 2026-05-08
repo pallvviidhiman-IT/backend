@@ -7,7 +7,7 @@ const cors = require("cors");
 const app = express();
 const User = require("./models/User");
 
-app.use(cors());           // Allow frontend connections
+         // Allow frontend connections
 app.use(express.json());   // Parse JSON request bodies
 
 

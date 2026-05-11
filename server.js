@@ -35,10 +35,13 @@ mongoose
 // GET Users
 app.get("/users", async (req, res) => {
   try {
+
     const users = await User.find();
 
     res.json(users);
+
   } catch (error) {
+
     res.status(500).json({
       message: error.message
     });
@@ -49,6 +52,7 @@ app.get("/users", async (req, res) => {
 // POST User
 app.post("/users", async (req, res) => {
   try {
+
     const newUser = new User({
       name: req.body.name
     });
@@ -58,6 +62,56 @@ app.post("/users", async (req, res) => {
     res.json(newUser);
 
   } catch (error) {
+
+    res.status(500).json({
+      message: error.message
+    });
+  }
+});
+
+
+// UPDATE User
+app.put("/users/:id", async (req, res) => {
+  try {
+
+    const updatedUser =
+      await User.findByIdAndUpdate(
+        req.params.id,
+
+        {
+          name: req.body.name
+        },
+
+        {
+          new: true
+        }
+      );
+
+    res.json(updatedUser);
+
+  } catch (error) {
+
+    res.status(500).json({
+      message: error.message
+    });
+  }
+});
+
+
+// DELETE User
+app.delete("/users/:id", async (req, res) => {
+  try {
+
+    await User.findByIdAndDelete(
+      req.params.id
+    );
+
+    res.json({
+      message: "User Deleted"
+    });
+
+  } catch (error) {
+
     res.status(500).json({
       message: error.message
     });
@@ -69,5 +123,7 @@ app.post("/users", async (req, res) => {
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-  console.log(`Server Running on ${PORT}`);
+  console.log(
+    `Server Running on port ${PORT}`
+  );
 });
